@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastro de Estados</title>
+
+    <!-- Adicionando jQuery antes do Semantic UI -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/semantic-ui/semantic.min.css">
+    <script src="/semantic-ui/semantic.min.js"></script>
+
+</head>
+
+<body style="overflow: hidden;">
+
+    <!-- Menu de Navegação -->
+    <div class="ui fixed inverted menu">
+        <div class="ui container">
+            <a href="/home" class="header item">
+                <i class="home icon"></i> Início
+            </a>
+            <a href="/estados" class="item"><i class="map marker alternate icon"></i> Estado</a>
+            <a href="/cadastro-cidade" class="item"><i class="building icon"></i> Cidade</a>
+            <a href="/cadastro-grupo" class="item"><i class="users icon"></i> Grupo</a>
+            <a href="/cadastro" class="item"><i class="user plus icon"></i> Usuário</a>
+            <div class="right menu">
+                <div class="item">
+                    <strong>Bem-vindo, <%= usuario.nome %>!</strong>
+                </div>
+                <a href="/logout" class="ui red button">Sair</a>
+            </div>
+        </div>
+    </div>

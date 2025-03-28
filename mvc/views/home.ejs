@@ -1,0 +1,57 @@
+<% let usuario ={}%>
+
+<%- include('partials/header', { usuario }) %>
+
+    <!-- Espaçamento do menu -->
+    <div class="ui container" style="margin-top: 80px;">
+        <h2 class="ui center aligned icon header">
+            <i class="cogs circular icon"></i>
+            Painel de Controle
+        </h2>
+
+        <!-- Grid Responsivo -->
+        <div class="ui stackable four column grid">
+            <div class="column">
+                <a href="/estados" class="ui raised card">
+                    <div class="content center aligned">
+                        <i class="big blue map marker alternate icon"></i>
+                        <div class="header">Cadastro de Estado</div>
+                        <div class="description">Gerenciar estados cadastrados</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="column">
+                <a href="/cadastro-cidade" class="ui raised card">
+                    <div class="content center aligned">
+                        <i class="big green building icon"></i>
+                        <div class="header">Cadastro de Cidade</div>
+                        <div class="description">Gerenciar cidades cadastradas</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="column">
+                <a href="/cadastro-grupo" class="ui raised card">
+                    <div class="content center aligned">
+                        <i class="big orange users icon"></i>
+                        <div class="header">Cadastro de Grupo</div>
+                        <div class="description">Gerenciar grupos de usuários</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="column">
+                <a href="/cadastro" class="ui raised card">
+                    <div class="content center aligned">
+                        <i class="big red user plus icon"></i>
+                        <div class="header">Cadastro de Usuário</div>
+                        <div class="description">Adicionar novos usuários</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

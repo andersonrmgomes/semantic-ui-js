@@ -1,0 +1,142 @@
+<% let usuario ={}%>
+
+<%- include('partials/header', { usuario }) %>
+
+<div class="ui container">
+    <h2 class="ui header">Cadastro de Estados</h2>
+
+    <!-- Botão para abrir o modal de cadastro -->
+    <button class="ui primary button" id="btnNovoEstado">
+        <i class="plus icon"></i> Novo Estado
+    </button>
+
+    <!-- Tabela de Estados -->
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>UF</th>
+                <th>Nome</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% estados.forEach(estado => { %>
+                <tr>
+                    <td><%= estado.id %></td>
+                    <td><%= estado.uf %></td>
+                    <td><%= estado.nome %></td>
+                    <td>
+                        <a href="/editarEstado/<%= estado.id %>" class="ui blue button">
+                            <i class="edit icon"></i> Editar
+                        </a>
+                        <a href="/deletarEstado/<%= estado.id %>" class="ui red button">
+                            <i class="trash icon"></i> Excluir
+                        </a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal de Cadastro -->
+<div class="ui modal" id="modalNovoEstado">
+    <div class="header">Novo Estado</div>
+    <div class="content">
+        <form class="ui form" id="formNovoEstado" method="POST" action="/cadastrarEstado">
+            <div class="field">
+                <label>UF</label>
+                <input type="text" name="uf" required>
+            </div>
+            <div class="field">
+                <label>Nome</label>
+                <input type="text" name="nome" required>
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+        <button class="ui red button" id="btnCancelar">Cancelar</button>
+        <button type="submit" class="ui green button" form="formNovoEstado">Cadastrar</button>
+    </div>
+</div>
+
+<!-- Modal para Editar Estado -->
+<div class="ui small modal" id="editModal">
+    <div class="header">Editar Estado</div>
+    <div class="content">
+        <form class="ui form" id="editForm">
+            <input type="hidden" name="id" id="edit-id">
+            
+            <div class="field">
+                <label>UF</label>
+                <input type="text" name="uf" id="edit-uf" required>
+            </div>
+
+            <div class="field">
+                <label>Nome</label>
+                <input type="text" name="nome" id="edit-nome" required>
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+        <button class="ui red button" id="cancelEdit">Cancelar</button>
+        <button class="ui green button" id="saveEdit">Salvar</button>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        // Abrir o modal de edição e preencher os campos
+        $('.open-edit-modal').click(function() {
+            $('#edit-id').val($(this).data('id'));
+            $('#edit-uf').val($(this).data('uf'));
+            $('#edit-nome').val($(this).data('nome'));
+
+            $('#editModal').modal('show');
+        });
+
+        // Fechar o modal ao clicar em "Cancelar"
+        $('#cancelEdit').click(function() {
+            $('#editModal').modal('hide');
+        });
+
+        // Salvar edição via AJAX
+        $('#saveEdit').click(function() {
+            let id = $('#edit-id').val();
+            let uf = $('#edit-uf').val();
+            let nome = $('#edit-nome').val();
+
+            $.ajax({
+                url: '/atualizarEstado/' + id,
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ uf, nome }),
+                success: function(response) {
+                    location.reload(); // Recarregar a página após salvar
+                },
+                error: function(err) {
+                    alert('Erro ao atualizar estado');
+                    console.error(err);
+                }
+            });
+        });
+    });
+</script>
+
+
+<!-- Script para ativar o modal -->
+<script>
+    $(document).ready(function() {
+        // Abrir Modal
+        $('#btnNovoEstado').click(function() {
+            $('#modalNovoEstado').modal('show');
+        });
+
+        // Fechar Modal ao clicar no botão "Cancelar"
+        $('#btnCancelar').click(function() {
+            $('#modalNovoEstado').modal('hide');
+        });
+    });
+</script>
+
+

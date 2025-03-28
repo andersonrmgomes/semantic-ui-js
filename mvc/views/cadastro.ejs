@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="/semantic-ui/semantic.min.css">
+</head>
+<body>
+
+    <div class="ui middle aligned center aligned grid" style="height: 100vh;">
+        <div class="column" style="max-width: 400px;">
+            <h2 class="ui teal image header">
+                <div class="content">Criar uma conta</div>
+            </h2>
+
+            <% if (mensagem) { %>
+                <div class="ui <% if (mensagem.includes('sucesso')) { %>positive<% } else { %>negative<% } %> message">
+                    <p><%= mensagem %></p>
+                </div>
+            <% } %>
+
+            <form class="ui large form" method="POST" action="/cadastro">
+                <div class="ui stacked segment">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="text" name="nome" placeholder="Nome Completo" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="envelope icon"></i>
+                            <input type="email" name="email" placeholder="E-mail" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password" name="senha" id="senha" placeholder="Senha" required>
+                        </div>
+                        <div style="margin-top: 5px; text-align: right;">
+                            <a href="#" onclick="toggleSenha()">👁️ Mostrar senha</a>
+                        </div>
+                    </div>
+
+                    <button class="ui fluid large teal button" type="submit">Cadastrar</button>
+                </div>
+            </form>
+
+            <div class="ui message">
+                Já tem uma conta? <a href="/login">Faça login</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSenha() {
+            var senha = document.getElementById("senha");
+            senha.type = senha.type === "password" ? "text" : "password";
+        }
+    </script>
+
+</body>
+</html>
